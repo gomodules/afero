@@ -157,7 +157,7 @@ func (fs *GcsFs) Remove(name string) error {
 }
 
 func (fs *GcsFs) RemoveAll(path string) error {
-	it := fs.bucket.Objects(fs.ctx, &storage.Query{fs.separator, path, false})
+	it := fs.bucket.Objects(fs.ctx, &storage.Query{Delimiter: fs.separator, Prefix: path, Versions: false})
 	for {
 		objAttrs, err := it.Next()
 		if err == iterator.Done {

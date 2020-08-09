@@ -161,7 +161,7 @@ func (o *GcsFile) readdir(count int) ([]*fileInfo, error) {
 	if o.ReadDirIt == nil {
 		//log.Printf("Querying path : %s\n", path)
 		o.ReadDirIt = o.resource.fs.bucket.Objects(
-			o.resource.ctx, &storage.Query{o.resource.fs.separator, path, false})
+			o.resource.ctx, &storage.Query{Delimiter: o.resource.fs.separator, Prefix: path, Versions: false})
 	}
 	var res []*fileInfo
 	for {
